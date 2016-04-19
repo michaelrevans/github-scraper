@@ -4,17 +4,63 @@
     <meta charset="utf-8">
     <title>Michael Evans' Github Repo Scraper</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
+    <header>
+      <h1>Github Scraper</h1>
+    </header>
 
-    <div class="sample">
-      <p>Hello World</p>
+    <!-- start of container -->
+    <div class="container" ng-controller="ListController">
+
+      <form ng-submit="submit()">
+        <div class="form-group row">
+          <label for="username" class="col-xs-2">Username</label>
+          <div class="col-xs-4">
+            <input type="text" name="username" ng-model="username" placeholder="Enter a Github username">
+          </div>
+          <input type="submit" class="col-xs-2" value="Submit" id="submit">
+        </div>
+      </form>
+
+
+
+
+      <div class="row row content">
+        <div class="col-xs-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Repository Name</td>
+                <td>Link</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="repo-row" ng-repeat="repo in repos">
+                <td>{{repo.id}}</td>
+                <td>{{repo.name}}</td>
+                <td><a target="_blank" ng-href={{repo.html_url}}>{{repo.html_url}}</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <div class="list">
+        {{list}}        
+      </div>
+
+    <!-- end of container -->
     </div>
 
 
-
-  <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
   </body>
 </html>
