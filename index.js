@@ -2,194 +2,37 @@ var app = angular.module('githubApp', []);
 
 app.controller('ListController', ['$scope', function($scope) {
 
-          $scope.list = [];
+          $scope.len = 0;
 
+          $scope.repos = []
 
-          $scope.submit = function() {
-            if ($scope.username) {
-              console.log($scope.username);
-              $scope.list.push(this.username);
-              $scope.username = '';
-            };
+          $scope.submit = function(usr) {
+            var requrl = 'https://api.github.com/users/' + usr + '/repos';
+            $.ajax({
+              type: 'GET',
+              url: requrl,
+              success: function(repositories) {
+                $scope.repos = repositories;
+                $scope.len = repositories.length
+                $scope.usr = usr;
+                if ($scope.len == 0) {
+                  $('#invalid').hide(200);
+                  $('#results').hide(200);
+                  $('#no-results').show(200);
+                } else {
+                  $('#no-results').hide(200);
+                  $('#invalid').hide(200);
+                  $('#results').show(200);
+                }
+              },
+              error: function() {
+                console.log("Invalid username");
+                $('#no-results').hide(200);
+                $('#results').hide(200);
+                $('#invalid').show(200);
+              },
+              async: false
+            })
           };
-
-          $scope.repos = [
-  {
-    "id": 26317394,
-    "name": "allmighty-autocomplete",
-    "full_name": "Kibo007/allmighty-autocomplete",
-    "owner": {
-      "login": "Kibo007",
-      "id": 2933353,
-      "avatar_url": "https://avatars.githubusercontent.com/u/2933353?v=3",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/Kibo007",
-      "html_url": "https://github.com/Kibo007",
-      "followers_url": "https://api.github.com/users/Kibo007/followers",
-      "following_url": "https://api.github.com/users/Kibo007/following{/other_user}",
-      "gists_url": "https://api.github.com/users/Kibo007/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/Kibo007/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/Kibo007/subscriptions",
-      "organizations_url": "https://api.github.com/users/Kibo007/orgs",
-      "repos_url": "https://api.github.com/users/Kibo007/repos",
-      "events_url": "https://api.github.com/users/Kibo007/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/Kibo007/received_events",
-      "type": "User",
-      "site_admin": false
-    },
-    "private": false,
-    "html_url": "https://github.com/Kibo007/allmighty-autocomplete",
-    "description": "Simple to use autocomplete directive in a module for AngularJs!",
-    "fork": true,
-    "url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete",
-    "forks_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/forks",
-    "keys_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/keys{/key_id}",
-    "collaborators_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/collaborators{/collaborator}",
-    "teams_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/teams",
-    "hooks_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/hooks",
-    "issue_events_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/issues/events{/number}",
-    "events_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/events",
-    "assignees_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/assignees{/user}",
-    "branches_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/branches{/branch}",
-    "tags_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/tags",
-    "blobs_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/git/blobs{/sha}",
-    "git_tags_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/git/tags{/sha}",
-    "git_refs_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/git/refs{/sha}",
-    "trees_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/git/trees{/sha}",
-    "statuses_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/statuses/{sha}",
-    "languages_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/languages",
-    "stargazers_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/stargazers",
-    "contributors_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/contributors",
-    "subscribers_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/subscribers",
-    "subscription_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/subscription",
-    "commits_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/commits{/sha}",
-    "git_commits_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/git/commits{/sha}",
-    "comments_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/comments{/number}",
-    "issue_comment_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/issues/comments{/number}",
-    "contents_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/contents/{+path}",
-    "compare_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/compare/{base}...{head}",
-    "merges_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/merges",
-    "archive_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/{archive_format}{/ref}",
-    "downloads_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/downloads",
-    "issues_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/issues{/number}",
-    "pulls_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/pulls{/number}",
-    "milestones_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/milestones{/number}",
-    "notifications_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/notifications{?since,all,participating}",
-    "labels_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/labels{/name}",
-    "releases_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/releases{/id}",
-    "deployments_url": "https://api.github.com/repos/Kibo007/allmighty-autocomplete/deployments",
-    "created_at": "2014-11-07T11:42:41Z",
-    "updated_at": "2014-11-27T10:49:56Z",
-    "pushed_at": "2014-11-27T10:49:55Z",
-    "git_url": "git://github.com/Kibo007/allmighty-autocomplete.git",
-    "ssh_url": "git@github.com:Kibo007/allmighty-autocomplete.git",
-    "clone_url": "https://github.com/Kibo007/allmighty-autocomplete.git",
-    "svn_url": "https://github.com/Kibo007/allmighty-autocomplete",
-    "homepage": "",
-    "size": 151,
-    "stargazers_count": 0,
-    "watchers_count": 0,
-    "language": "JavaScript",
-    "has_issues": false,
-    "has_downloads": true,
-    "has_wiki": true,
-    "has_pages": false,
-    "forks_count": 0,
-    "mirror_url": null,
-    "open_issues_count": 0,
-    "forks": 0,
-    "open_issues": 0,
-    "watchers": 0,
-    "default_branch": "master"
-  },
-  {
-    "id": 31367408,
-    "name": "angular-md",
-    "full_name": "Kibo007/angular-md",
-    "owner": {
-      "login": "Kibo007",
-      "id": 2933353,
-      "avatar_url": "https://avatars.githubusercontent.com/u/2933353?v=3",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/Kibo007",
-      "html_url": "https://github.com/Kibo007",
-      "followers_url": "https://api.github.com/users/Kibo007/followers",
-      "following_url": "https://api.github.com/users/Kibo007/following{/other_user}",
-      "gists_url": "https://api.github.com/users/Kibo007/gists{/gist_id}",
-      "starred_url": "https://api.github.com/users/Kibo007/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/Kibo007/subscriptions",
-      "organizations_url": "https://api.github.com/users/Kibo007/orgs",
-      "repos_url": "https://api.github.com/users/Kibo007/repos",
-      "events_url": "https://api.github.com/users/Kibo007/events{/privacy}",
-      "received_events_url": "https://api.github.com/users/Kibo007/received_events",
-      "type": "User",
-      "site_admin": false
-    },
-    "private": false,
-    "html_url": "https://github.com/Kibo007/angular-md",
-    "description": "Angular directive to render Markdown text. It's built on blazingly fast markdown parser 'marked'.",
-    "fork": true,
-    "url": "https://api.github.com/repos/Kibo007/angular-md",
-    "forks_url": "https://api.github.com/repos/Kibo007/angular-md/forks",
-    "keys_url": "https://api.github.com/repos/Kibo007/angular-md/keys{/key_id}",
-    "collaborators_url": "https://api.github.com/repos/Kibo007/angular-md/collaborators{/collaborator}",
-    "teams_url": "https://api.github.com/repos/Kibo007/angular-md/teams",
-    "hooks_url": "https://api.github.com/repos/Kibo007/angular-md/hooks",
-    "issue_events_url": "https://api.github.com/repos/Kibo007/angular-md/issues/events{/number}",
-    "events_url": "https://api.github.com/repos/Kibo007/angular-md/events",
-    "assignees_url": "https://api.github.com/repos/Kibo007/angular-md/assignees{/user}",
-    "branches_url": "https://api.github.com/repos/Kibo007/angular-md/branches{/branch}",
-    "tags_url": "https://api.github.com/repos/Kibo007/angular-md/tags",
-    "blobs_url": "https://api.github.com/repos/Kibo007/angular-md/git/blobs{/sha}",
-    "git_tags_url": "https://api.github.com/repos/Kibo007/angular-md/git/tags{/sha}",
-    "git_refs_url": "https://api.github.com/repos/Kibo007/angular-md/git/refs{/sha}",
-    "trees_url": "https://api.github.com/repos/Kibo007/angular-md/git/trees{/sha}",
-    "statuses_url": "https://api.github.com/repos/Kibo007/angular-md/statuses/{sha}",
-    "languages_url": "https://api.github.com/repos/Kibo007/angular-md/languages",
-    "stargazers_url": "https://api.github.com/repos/Kibo007/angular-md/stargazers",
-    "contributors_url": "https://api.github.com/repos/Kibo007/angular-md/contributors",
-    "subscribers_url": "https://api.github.com/repos/Kibo007/angular-md/subscribers",
-    "subscription_url": "https://api.github.com/repos/Kibo007/angular-md/subscription",
-    "commits_url": "https://api.github.com/repos/Kibo007/angular-md/commits{/sha}",
-    "git_commits_url": "https://api.github.com/repos/Kibo007/angular-md/git/commits{/sha}",
-    "comments_url": "https://api.github.com/repos/Kibo007/angular-md/comments{/number}",
-    "issue_comment_url": "https://api.github.com/repos/Kibo007/angular-md/issues/comments{/number}",
-    "contents_url": "https://api.github.com/repos/Kibo007/angular-md/contents/{+path}",
-    "compare_url": "https://api.github.com/repos/Kibo007/angular-md/compare/{base}...{head}",
-    "merges_url": "https://api.github.com/repos/Kibo007/angular-md/merges",
-    "archive_url": "https://api.github.com/repos/Kibo007/angular-md/{archive_format}{/ref}",
-    "downloads_url": "https://api.github.com/repos/Kibo007/angular-md/downloads",
-    "issues_url": "https://api.github.com/repos/Kibo007/angular-md/issues{/number}",
-    "pulls_url": "https://api.github.com/repos/Kibo007/angular-md/pulls{/number}",
-    "milestones_url": "https://api.github.com/repos/Kibo007/angular-md/milestones{/number}",
-    "notifications_url": "https://api.github.com/repos/Kibo007/angular-md/notifications{?since,all,participating}",
-    "labels_url": "https://api.github.com/repos/Kibo007/angular-md/labels{/name}",
-    "releases_url": "https://api.github.com/repos/Kibo007/angular-md/releases{/id}",
-    "deployments_url": "https://api.github.com/repos/Kibo007/angular-md/deployments",
-    "created_at": "2015-02-26T13:07:09Z",
-    "updated_at": "2015-02-26T14:04:58Z",
-    "pushed_at": "2015-02-26T14:04:58Z",
-    "git_url": "git://github.com/Kibo007/angular-md.git",
-    "ssh_url": "git@github.com:Kibo007/angular-md.git",
-    "clone_url": "https://github.com/Kibo007/angular-md.git",
-    "svn_url": "https://github.com/Kibo007/angular-md",
-    "homepage": "",
-    "size": 346,
-    "stargazers_count": 0,
-    "watchers_count": 0,
-    "language": "JavaScript",
-    "has_issues": false,
-    "has_downloads": true,
-    "has_wiki": true,
-    "has_pages": false,
-    "forks_count": 0,
-    "mirror_url": null,
-    "open_issues_count": 0,
-    "forks": 0,
-    "open_issues": 0,
-    "watchers": 0,
-    "default_branch": "master"
-  }
-]
 
 }]);

@@ -14,21 +14,20 @@
     <!-- start of container -->
     <div class="container" ng-controller="ListController">
 
-      <form ng-submit="submit()">
+      <form ng-submit="submit(username)">
         <div class="form-group row">
           <label for="username" class="col-xs-2">Username</label>
           <div class="col-xs-4">
-            <input type="text" name="username" ng-model="username" placeholder="Enter a Github username">
+            <input type="text" name="username" ng-model="username" placeholder="Enter a Github username" id="username-input">
           </div>
           <input type="submit" class="col-xs-2" value="Submit" id="submit">
         </div>
       </form>
 
 
-
-
-      <div class="row row content">
+      <div id="results" class="row row content">
         <div class="col-xs-12">
+          <p>{{len}} repositories found for <strong>{{usr}}</strong></p>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -49,10 +48,24 @@
       </div>
 
 
-
-      <div class="list">
-        {{list}}        
+      <div id="invalid" class="row row content">
+        <div class="col-xs-12">
+          <h2>Sorry, this username was not recognised. Please enter a valid Github username.</h2>
+        </div>
       </div>
+
+      <div id="no-results" class="row row content">
+        <div class="col-xs-12">
+          <h2>This user has no repos</h2>
+        </div>
+      </div>
+
+      <!-- just used to test, will be removed later - REMOVE START
+      <div class="list">
+        {{list}}
+      </div>
+      - REMOVE END -->
+
 
     <!-- end of container -->
     </div>
