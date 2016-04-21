@@ -13,8 +13,7 @@ app.controller('ListController', ['$scope', function($scope) {
               url: requrl,
               success: function(repositories) {
                 $('.row-content').hide(200);
-                var usrVal = $('#username-input').val()
-                console.log($('#username-input').val())
+                var usrVal = $('#username-input').val();
                 $scope.repos = repositories;
                 $scope.len = repositories.length;
                 if ($scope.len == 0) {
