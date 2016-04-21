@@ -9,26 +9,25 @@ app.controller('ListController', ['$scope', function($scope) {
           $scope.submit = function(usr) {
             var requrl = 'https://api.github.com/users/' + usr + '/repos';
             $.ajax({
-              type: 'GET',
+              method: 'GET',
               url: requrl,
               success: function(repositories) {
+                $('.row-content').hide(200);
+                var usrVal = $('#username-input').val()
+                console.log($('#username-input').val())
                 $scope.repos = repositories;
-                $scope.len = repositories.length
-                $scope.usr = usr;
+                $scope.len = repositories.length;
                 if ($scope.len == 0) {
-                  $('#invalid').hide(200);
-                  $('#results').hide(200);
                   $('#no-results').show(200);
+                } else if (usrVal === '') {
+                  $('#invalid').show(200);
                 } else {
-                  $('#no-results').hide(200);
-                  $('#invalid').hide(200);
                   $('#results').show(200);
                 }
               },
-              error: function() {
-                console.log("Invalid username");
-                $('#no-results').hide(200);
-                $('#results').hide(200);
+              error: function(jqXHR, textStatus, errorThrown) {
+                console.log("Status code: " + jqXHR.status + " - " + errorThrown);
+                $('.row-content').hide(200);
                 $('#invalid').show(200);
               },
               async: false

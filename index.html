@@ -24,8 +24,8 @@
         </div>
       </form>
 
-
-      <div id="results" class="row row content">
+      <!-- table containing github repo information -->
+      <div id="results" class="row row-content">
         <div class="col-xs-12">
           <p>{{len}} repositories found for <strong>{{usr}}</strong></p>
           <table class="table table-striped">
@@ -47,25 +47,19 @@
         </div>
       </div>
 
-
-      <div id="invalid" class="row row content">
+      <!-- message when github username is invalid/not recognised-->
+      <div id="invalid" class="row row-content">
         <div class="col-xs-12">
           <h2>Sorry, this username was not recognised. Please enter a valid Github username.</h2>
         </div>
       </div>
 
-      <div id="no-results" class="row row content">
+      <!-- message when repos len is 0 -->
+      <div id="no-results" class="row row-content">
         <div class="col-xs-12">
           <h2>This user has no repos</h2>
         </div>
       </div>
-
-      <!-- just used to test, will be removed later - REMOVE START
-      <div class="list">
-        {{list}}
-      </div>
-      - REMOVE END -->
-
 
     <!-- end of container -->
     </div>
