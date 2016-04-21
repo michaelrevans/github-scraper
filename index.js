@@ -16,6 +16,7 @@ app.controller('ListController', ['$scope', function($scope) {
                 var usrVal = $('#username-input').val();
                 $scope.repos = repositories;
                 $scope.len = repositories.length;
+                $scope.usr = usr;
                 if ($scope.len == 0) {
                   $('#no-results').show(200);
                 } else if (usrVal === '') {
